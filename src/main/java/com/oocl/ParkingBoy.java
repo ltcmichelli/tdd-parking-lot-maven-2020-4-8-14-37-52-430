@@ -19,7 +19,7 @@ public class ParkingBoy {
 
         Optional<ParkingLot> selectedParkingLot = selectParkingLot();
 
-        if (selectedParkingLot.isPresent()){
+        if (selectedParkingLot.isPresent()) {
             ParkingTicket parkingTicket = new ParkingTicket(selectedParkingLot.get());
             selectedParkingLot.get().park(car, parkingTicket);
             return parkingTicket;

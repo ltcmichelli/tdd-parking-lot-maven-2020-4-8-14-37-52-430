@@ -9,7 +9,7 @@ public class ParkingLotTest {
     private Car car;
 
     @Before
-    public void setup(){
+    public void setup() {
         parkingLot = new ParkingLot();
         car = new Car();
     }
