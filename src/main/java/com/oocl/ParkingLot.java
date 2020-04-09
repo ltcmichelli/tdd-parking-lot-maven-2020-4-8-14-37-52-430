@@ -26,7 +26,7 @@ public class ParkingLot {
         if (!isFull() && car != null) {
             parkingTicketCarMap.put(parkingTicket, car);
             availableSpace = capacity - parkingTicketCarMap.size();
-            availablePositionRate =  (float)availableSpace / (float)capacity;
+            availablePositionRate = (float) availableSpace / (float) capacity;
         }
     }
 
