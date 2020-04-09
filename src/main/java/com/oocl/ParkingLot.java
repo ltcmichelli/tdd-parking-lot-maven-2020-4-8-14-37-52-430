@@ -12,17 +12,12 @@ public class ParkingLot {
         this.capacity = DEFAULT_CAPACITY_10;
     }
 
-    public ParkingLot(int capacity){
+    public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
 
-    public void setParkingTicketCarMap(Map<ParkingTicket, Car> parkingTicketCarMap) {
-        this.parkingTicketCarMap = parkingTicketCarMap;
-    }
-
     public void park(Car car, ParkingTicket parkingTicket) {
-        //ParkingTicket parkingTicket = new ParkingTicket();
-        if (!isFull() && car != null){
+        if (!isFull() && car != null) {
             parkingTicketCarMap.put(parkingTicket, car);
         }
     }
@@ -32,7 +27,7 @@ public class ParkingLot {
         return car;
     }
 
-    public boolean isFull(){
+    public boolean isFull() {
         return parkingTicketCarMap.size() == capacity;
     }
 }

@@ -7,16 +7,8 @@ public class ParkingBoy {
         this.parkingLot = parkingLot;
     }
 
-    public ParkingLot getParkingLot() {
-        return parkingLot;
-    }
-
-    public void setParkingLot(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
-    }
-
     public ParkingTicket park(Car car) {
-        if (this.parkingLot.isFull() || car == null){
+        if (this.parkingLot.isFull() || car == null) {
             return null;
         }
         ParkingTicket parkingTicket = new ParkingTicket();

@@ -3,28 +3,10 @@ package com.oocl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ParkingBoyTest {
-    private Car car = new Car();
-    private ParkingTicket parkingTicket = new ParkingTicket();
-
-    private HashMap<ParkingTicket, Car> fullParkingMap = new HashMap<ParkingTicket, Car>() {{
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-    }};
 
     @Test
-    public void should_park_car_to_parking_lot(){
+    public void should_park_car_to_parking_lot() {
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
@@ -36,7 +18,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_fetch_car_from_parking_lot(){
+    public void should_fetch_car_from_parking_lot() {
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();

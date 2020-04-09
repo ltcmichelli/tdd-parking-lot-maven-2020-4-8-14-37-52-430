@@ -3,24 +3,7 @@ package com.oocl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 public class ParkingLotTest {
-    private Car car = new Car();
-    private ParkingTicket parkingTicket = new ParkingTicket();
-
-    private HashMap<ParkingTicket, Car> fullParkingMap = new HashMap<ParkingTicket, Car>() {{
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-        put(parkingTicket, car);
-    }};
 
     @Test
     public void should_return_parking_ticket_when_park_car() {
@@ -70,15 +53,4 @@ public class ParkingLotTest {
         Assert.assertNull(fetchedCarInSecondTime);
     }
 
-//    @Test
-//    public void should_not_park_car_when_parking_lot_capacity_is_full(){
-//        ParkingLot parkingLot = new ParkingLot();
-//        parkingLot.setParkingTicketCarMap(fullParkingMap);
-//        Car car = new Car();
-//        ParkingTicket parkingTicket = new ParkingTicket();
-//
-//        parkingLot.park(car, parkingTicket);
-//        Assert.assertNull(parkingTicket);
-//
-//    }
 }
