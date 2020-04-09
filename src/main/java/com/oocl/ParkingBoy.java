@@ -2,11 +2,14 @@ package com.oocl;
 
 import com.oocl.common.ErrorMsg;
 
-public class ParkingBoy {
-    private ParkingLot parkingLot;
+import java.util.List;
+import java.util.Optional;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+public class ParkingBoy {
+    private List<ParkingLot> parkingLotList;
+
+    public ParkingBoy(List<ParkingLot> parkingLotList) {
+        this.parkingLotList = parkingLotList;
     }
 
     public ParkingTicket park(Car car) {
@@ -14,24 +17,31 @@ public class ParkingBoy {
             return null;
         }
 
-        if (this.parkingLot.isFull()) {
-            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION);
+        Optional<ParkingLot> selectedParkingLot = selectParkingLot();
+
+        if (selectedParkingLot.isPresent()){
+            ParkingTicket parkingTicket = new ParkingTicket(selectedParkingLot.get());
+            selectedParkingLot.get().park(car, parkingTicket);
+            return parkingTicket;
         }
 
-        ParkingTicket parkingTicket = new ParkingTicket();
-        this.parkingLot.park(car, parkingTicket);
-        return parkingTicket;
+        throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION);
+
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
             throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NO_PARKING_TICKET);
         }
-
-        Car fetchedCar = parkingLot.fetch(parkingTicket);
+        ParkingLot designatedParkingLot = parkingTicket.getParkingLot();
+        Car fetchedCar = designatedParkingLot.fetch(parkingTicket);
         if (fetchedCar == null) {
             throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
         }
         return fetchedCar;
+    }
+
+    public Optional<ParkingLot> selectParkingLot() {
+        return parkingLotList.stream().filter(lot -> !lot.isFull()).findFirst();
     }
 }
