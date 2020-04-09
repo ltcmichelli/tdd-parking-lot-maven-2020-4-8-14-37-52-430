@@ -1,7 +1,8 @@
 package com.oocl;
 
+import com.oocl.common.ErrorMsg;
+
 public class ParkingBoy {
-    public static final String ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket";
     private ParkingLot parkingLot;
 
     public ParkingBoy(ParkingLot parkingLot) {
@@ -18,9 +19,13 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
+        if (parkingTicket == null){
+            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NO_PARKING_TICKET);
+        }
+
         Car fetchedCar = parkingLot.fetch(parkingTicket);
         if (fetchedCar == null){
-            throw new IllegalArgumentException(ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
+            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
         } return fetchedCar;
     }
 }
