@@ -1,9 +1,15 @@
 package com.oocl;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ParkingBoyTest {
+    public static final String ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket";
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void should_park_car_to_parking_lot() {
@@ -18,7 +24,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_fetch_car_from_parking_lot() {
+    public void should_fetch_car_when_fetch_from_parking_lot_with_correct_ticket() {
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
@@ -40,5 +46,19 @@ public class ParkingBoyTest {
 
         Assert.assertNull(newParkingTicket);
 
+    }
+
+    @Test
+    public void should_return_exception_msg_when_fetch_with_incorrect_ticket() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = new ParkingTicket();
+        ParkingTicket incorrectParkingTicket = new ParkingTicket();
+
+        parkingLot.park(car, parkingTicket);
+        parkingBoy.fetch(incorrectParkingTicket);
     }
 }
