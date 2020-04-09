@@ -72,4 +72,18 @@ public class ParkingBoyTest {
 
         parkingBoy.fetch(null);
     }
+
+    @Test
+    public void should_return_exception_msg_when_fetch_with_used_ticket() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = new ParkingTicket();
+
+        parkingLot.park(car, parkingTicket);
+        parkingBoy.fetch(parkingTicket);
+        parkingBoy.fetch(parkingTicket);
+    }
 }
