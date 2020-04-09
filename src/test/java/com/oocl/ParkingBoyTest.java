@@ -46,7 +46,6 @@ public class ParkingBoyTest {
         ParkingTicket newParkingTicket = parkingBoy.park(car);
 
         Assert.assertNull(newParkingTicket);
-
     }
 
     @Test

@@ -23,8 +23,7 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        Car car = parkingTicketCarMap.remove(parkingTicket);
-        return car;
+        return parkingTicketCarMap.remove(parkingTicket);
     }
 
     public boolean isFull() {
