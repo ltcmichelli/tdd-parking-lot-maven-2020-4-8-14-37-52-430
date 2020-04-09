@@ -7,18 +7,22 @@ public class ParkingLot {
     public static final int DEFAULT_CAPACITY_10 = 10;
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private int capacity;
+    private int space;
 
     public ParkingLot() {
         this.capacity = DEFAULT_CAPACITY_10;
+        this.space = DEFAULT_CAPACITY_10;
     }
 
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
+    public ParkingLot(int parkingLotSize) {
+        this.capacity = parkingLotSize;
+        this.space = parkingLotSize;
     }
 
     public void park(Car car, ParkingTicket parkingTicket) {
         if (!isFull() && car != null) {
             parkingTicketCarMap.put(parkingTicket, car);
+            space = capacity - parkingTicketCarMap.size();
         }
     }
 
@@ -27,6 +31,10 @@ public class ParkingLot {
     }
 
     public boolean isFull() {
-        return parkingTicketCarMap.size() == capacity;
+        return space == 0;
+    }
+
+    public int getSpace() {
+        return space;
     }
 }

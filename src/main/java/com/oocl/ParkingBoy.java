@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ParkingBoy {
-    private List<ParkingLot> parkingLotList;
+    public List<ParkingLot> parkingLotList;
 
     public ParkingBoy(List<ParkingLot> parkingLotList) {
         this.parkingLotList = parkingLotList;
