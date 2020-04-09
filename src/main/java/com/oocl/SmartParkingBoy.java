@@ -11,6 +11,6 @@ public class SmartParkingBoy extends ParkingBoy {
 
     @Override
     public Optional<ParkingLot> selectParkingLot() {
-        return parkingLotList.stream().max(Comparator.comparing(ParkingLot::getSpace));
+        return parkingLotList.stream().max(Comparator.comparing(ParkingLot::getAvailableSpace));
     }
 }
