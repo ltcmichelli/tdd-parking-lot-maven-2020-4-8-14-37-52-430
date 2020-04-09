@@ -35,7 +35,9 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_not_park_car_when_parking_lot_capacity_is_full() {
+    public void should_return_exception_msg_when_parking_lot_capacity_is_full() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION);
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();

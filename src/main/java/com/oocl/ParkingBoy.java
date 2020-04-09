@@ -10,9 +10,14 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        if (this.parkingLot.isFull() || car == null) {
+        if (car == null) {
             return null;
         }
+
+        if (this.parkingLot.isFull()){
+            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION);
+        }
+
         ParkingTicket parkingTicket = new ParkingTicket();
         this.parkingLot.park(car, parkingTicket);
         return parkingTicket;
