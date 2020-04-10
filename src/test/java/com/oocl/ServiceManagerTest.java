@@ -18,4 +18,16 @@ public class ServiceManagerTest {
         Assert.assertTrue(serviceManager.getParkingBoyManagementList().contains(parkingBoy));
 
     }
+
+    @Test
+    public void should_assign_parking_boy_to_park_car(){
+        ParkingLot parkingLot = new ParkingLot();
+        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        Car car = new Car();
+
+        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
+
+        Assert.assertNull(parkingTicket);
+    }
 }
