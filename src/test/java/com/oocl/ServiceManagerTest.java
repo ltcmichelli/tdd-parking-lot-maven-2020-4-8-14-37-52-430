@@ -43,4 +43,18 @@ public class ServiceManagerTest {
 
         Assert.assertNull(parkingTicket);
     }
+
+    @Test
+    public void should_assign_parking_boy_to_fetch_car_given_that_boy_is_on_management_list(){
+        ParkingLot parkingLot = new ParkingLot();
+        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        Car car = new Car();
+
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
+        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
+        Car fetchedCar = serviceManager.assignParkingBoyToFetch(parkingBoy, parkingTicket);
+
+        Assert.assertEquals(car, fetchedCar);
+    }
 }

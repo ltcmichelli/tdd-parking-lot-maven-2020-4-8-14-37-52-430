@@ -25,4 +25,11 @@ public class ServiceManager extends ParkingBoy{
         }
         return null;
     }
+
+    public Car assignParkingBoyToFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket){
+        if (parkingBoyManagementList.contains(parkingBoy)){
+            return parkingBoy.fetch(parkingTicket);
+        }
+        return null;
+    }
 }
