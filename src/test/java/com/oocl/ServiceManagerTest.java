@@ -26,6 +26,19 @@ public class ServiceManagerTest {
         ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         Car car = new Car();
 
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
+        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
+
+        Assert.assertNotNull(parkingTicket);
+    }
+
+    @Test
+    public void should_not_assign_parking_boy_to_park_car_given_that_boy_is_not_on_management_list(){
+        ParkingLot parkingLot = new ParkingLot();
+        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        Car car = new Car();
+
         ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
 
         Assert.assertNull(parkingTicket);
