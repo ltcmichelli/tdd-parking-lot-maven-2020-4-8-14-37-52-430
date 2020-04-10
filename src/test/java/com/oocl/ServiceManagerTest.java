@@ -20,7 +20,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    public void should_assign_parking_boy_to_park_car(){
+    public void should_assign_parking_boy_to_park_car_given_that_boy_is_on_management_list(){
         ParkingLot parkingLot = new ParkingLot();
         ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
