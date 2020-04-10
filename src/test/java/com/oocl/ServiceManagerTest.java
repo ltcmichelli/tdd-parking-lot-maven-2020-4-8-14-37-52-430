@@ -26,8 +26,8 @@ public class ServiceManagerTest {
 
     @Test
     public void should_add_parking_boy_to_management_list_when_assign(){
-        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(parkingLot));
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
 
@@ -37,8 +37,8 @@ public class ServiceManagerTest {
 
     @Test
     public void should_assign_parking_boy_to_park_car_given_that_boy_is_on_management_list(){
-        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(parkingLot));
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
         ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
@@ -48,8 +48,8 @@ public class ServiceManagerTest {
 
     @Test
     public void should_not_assign_parking_boy_to_park_car_given_that_boy_is_not_on_management_list(){
-        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(parkingLot));
 
         ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
 
@@ -58,8 +58,8 @@ public class ServiceManagerTest {
 
     @Test
     public void should_assign_parking_boy_to_fetch_car_given_that_boy_is_on_management_list(){
-        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(parkingLot));
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
         ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
@@ -70,8 +70,8 @@ public class ServiceManagerTest {
 
     @Test
     public void should_not_assign_parking_boy_to_fetch_car_given_that_boy_is_not_on_management_list(){
-        ServiceManager serviceManager = new ServiceManager(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
+        ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(parkingLot));
 
         ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
         Car fetchedCar = serviceManager.assignParkingBoyToFetch(parkingBoy, parkingTicket);
