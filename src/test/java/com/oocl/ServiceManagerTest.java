@@ -1,14 +1,19 @@
 package com.oocl;
 
+import com.oocl.common.ErrorMsg;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class ServiceManagerTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     private ParkingLot parkingLot;
     private Car car;
@@ -98,5 +103,63 @@ public class ServiceManagerTest {
         Car fetchedCarFromParkingLot = serviceManager.fetch(parkingTicket);
         //then
         Assert.assertEquals(fetchedCarFromParkingLot, car);
+    }
+
+    @Test
+    public void should_return_exception_msg_when_parking_lot_capacity_is_full() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION);
+        List<ParkingLot> parkingLotList = Collections.singletonList(new ParkingLot(1));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        ServiceManager serviceManager = new ServiceManager(parkingLotList);
+
+        parkingBoy.park(car);
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
+        serviceManager.assignParkingBoyToPark(parkingBoy, car);
+    }
+
+    @Test
+    public void should_return_exception_msg_when_fetch_with_incorrect_ticket() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
+        List<ParkingLot> parkingLotList = Collections.singletonList(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        Car car = new Car();
+        ServiceManager serviceManager = new ServiceManager(parkingLotList);
+        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket incorrectParkingTicket = new ParkingTicket(parkingLot);
+
+        parkingLot.park(car, parkingTicket);
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
+        serviceManager.assignParkingBoyToFetch(parkingBoy, incorrectParkingTicket);
+    }
+
+    @Test
+    public void should_return_exception_msg_when_fetch_with_no_ticket() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.ERROR_MSG_OF_NO_PARKING_TICKET);
+        List<ParkingLot> parkingLotList = Collections.singletonList(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        ServiceManager serviceManager = new ServiceManager(parkingLotList);
+
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
+        serviceManager.assignParkingBoyToFetch(parkingBoy, null);
+    }
+
+    @Test
+    public void should_return_exception_msg_when_fetch_with_used_ticket() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
+
+        List<ParkingLot> parkingLotList = Collections.singletonList(parkingLot);
+        ServiceManager serviceManager = new ServiceManager(parkingLotList);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        Car car = new Car();
+        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
+        parkingLot.park(car, parkingTicket);
+        parkingBoy.fetch(parkingTicket);
+        serviceManager.assignParkingBoyToFetch(parkingBoy, parkingTicket);
     }
 }
