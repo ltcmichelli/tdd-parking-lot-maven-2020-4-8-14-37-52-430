@@ -1,9 +1,11 @@
 package com.oocl;
 
+import com.oocl.common.ErrorMsg;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceManager extends ParkingBoy{
+public class ServiceManager extends ParkingBoy {
     private List<ParkingBoy> parkingBoyManagementList = new ArrayList<>();
 
     public ServiceManager(List<ParkingLot> parkingLotList) {
@@ -19,15 +21,16 @@ public class ServiceManager extends ParkingBoy{
         return this.parkingBoyManagementList;
     }
 
-    public ParkingTicket assignParkingBoyToPark(ParkingBoy parkingBoy, Car car){
-        if (parkingBoyManagementList.contains(parkingBoy)){
-            return parkingBoy.park(car);
-        }
-        return null;
+    public ParkingTicket assignParkingBoyToPark(Car car) {
+        ParkingBoy parkingBoy =
+                parkingBoyManagementList.stream().filter(boy -> boy.selectParkingLot().isPresent()).findFirst()
+                        .orElseThrow(() -> new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION));
+
+        return parkingBoy.park(car);
     }
 
-    public Car assignParkingBoyToFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket){
-        if (parkingBoyManagementList.contains(parkingBoy)){
+    public Car assignParkingBoyToFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
+        if (parkingBoyManagementList.contains(parkingBoy)) {
             return parkingBoy.fetch(parkingTicket);
         }
         return null;
