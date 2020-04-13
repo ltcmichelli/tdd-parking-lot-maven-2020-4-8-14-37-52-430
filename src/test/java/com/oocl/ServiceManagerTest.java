@@ -7,7 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +54,7 @@ public class ServiceManagerTest {
         ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(new ParkingLot(1)));
         parkingBoy.park(car);
+        serviceManager.assignParkingBoyToManagementList(parkingBoy);
 
         serviceManager.assignParkingBoyToPark(car);
     }

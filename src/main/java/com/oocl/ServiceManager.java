@@ -39,10 +39,6 @@ public class ServiceManager extends ParkingBoy {
             throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NO_PARKING_BOY);
         }
 
-        try{
-            return parkingBoyManagementList.stream().map(boy -> boy.fetch(parkingTicket)).findFirst();
-        }catch (IllegalArgumentException exception) {
-            throw exception;
-        }
+        return parkingBoyManagementList.stream().map(boy -> boy.fetch(parkingTicket)).findFirst();
     }
 }
