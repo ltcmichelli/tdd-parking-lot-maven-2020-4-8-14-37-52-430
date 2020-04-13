@@ -22,8 +22,11 @@ public class ServiceManager extends ParkingBoy {
         return this.parkingBoyManagementList;
     }
 
-    // TODO check if the list is null
     public ParkingTicket assignParkingBoyToPark(Car car) {
+        if (parkingBoyManagementList.isEmpty()){
+            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NO_PARKING_BOY);
+        }
+
         ParkingBoy parkingBoy =
                 parkingBoyManagementList.stream().filter(boy -> boy.selectParkingLot().isPresent()).findFirst()
                         .orElseThrow(() -> new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION));
@@ -32,6 +35,10 @@ public class ServiceManager extends ParkingBoy {
     }
 
     public Optional<Car> assignParkingBoyToFetch(ParkingTicket parkingTicket) {
+        if (parkingBoyManagementList.isEmpty()){
+            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NO_PARKING_BOY);
+        }
+
         try{
             return parkingBoyManagementList.stream().map(boy -> boy.fetch(parkingTicket)).findFirst();
         }catch (IllegalArgumentException exception) {
