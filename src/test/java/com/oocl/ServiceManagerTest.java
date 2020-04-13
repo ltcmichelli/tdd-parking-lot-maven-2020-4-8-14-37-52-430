@@ -10,6 +10,7 @@ import org.junit.rules.ExpectedException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class ServiceManagerTest {
     @Rule
@@ -62,10 +63,10 @@ public class ServiceManagerTest {
         ParkingBoy parkingBoy = new ParkingBoy(Collections.singletonList(parkingLot));
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
-        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(car);
-        Car fetchedCar = serviceManager.assignParkingBoyToFetch(parkingBoy, parkingTicket);
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+        Optional<Car> fetchedCar = serviceManager.assignParkingBoyToFetch(parkingTicket);
 
-        Assert.assertEquals(car, fetchedCar);
+        Assert.assertEquals(Optional.of(car), fetchedCar);
     }
 
 //    @Test
@@ -131,7 +132,7 @@ public class ServiceManagerTest {
 
         parkingLot.park(car, parkingTicket);
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
-        serviceManager.assignParkingBoyToFetch(parkingBoy, incorrectParkingTicket);
+        serviceManager.assignParkingBoyToFetch(incorrectParkingTicket);
     }
 
     @Test
@@ -143,7 +144,7 @@ public class ServiceManagerTest {
         ServiceManager serviceManager = new ServiceManager(parkingLotList);
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
-        serviceManager.assignParkingBoyToFetch(parkingBoy, null);
+        serviceManager.assignParkingBoyToFetch(null);
     }
 
     @Test
@@ -160,6 +161,6 @@ public class ServiceManagerTest {
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
         parkingLot.park(car, parkingTicket);
         parkingBoy.fetch(parkingTicket);
-        serviceManager.assignParkingBoyToFetch(parkingBoy, parkingTicket);
+        serviceManager.assignParkingBoyToFetch(parkingTicket);
     }
 }
