@@ -28,7 +28,7 @@ public class ServiceManager extends ParkingBoy {
         }
 
         ParkingBoy parkingBoy =
-                parkingBoyManagementList.stream().filter(boy -> boy.selectParkingLot().isPresent()).findFirst()
+                parkingBoyManagementList.stream().filter(boy -> boy.selectParkingLot() != null).findFirst()
                         .orElseThrow(() -> new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NOT_ENOUGH_POSITION));
 
         return parkingBoy.park(car);

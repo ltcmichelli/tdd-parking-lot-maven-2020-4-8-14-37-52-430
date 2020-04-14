@@ -13,13 +13,13 @@ public class ParkingLot {
     public ParkingLot() {
         this.capacity = DEFAULT_CAPACITY_10;
         this.availableSpace = DEFAULT_CAPACITY_10;
-        this.availablePositionRate = 0f;
+        this.availablePositionRate = 1f;
     }
 
     public ParkingLot(int parkingLotSize) {
         this.capacity = parkingLotSize;
         this.availableSpace = parkingLotSize;
-        this.availablePositionRate = 0f;
+        this.availablePositionRate = 1f;
     }
 
     public void park(Car car, ParkingTicket parkingTicket) {

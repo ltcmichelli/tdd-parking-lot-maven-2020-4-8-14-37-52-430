@@ -17,11 +17,11 @@ public class ParkingBoy {
             return null;
         }
 
-        Optional<ParkingLot> selectedParkingLot = selectParkingLot();
+        ParkingLot selectedParkingLot = selectParkingLot();
 
-        if (selectedParkingLot.isPresent()) {
-            ParkingTicket parkingTicket = new ParkingTicket(selectedParkingLot.get());
-            selectedParkingLot.get().park(car, parkingTicket);
+        if (selectedParkingLot != null) {
+            ParkingTicket parkingTicket = new ParkingTicket(selectedParkingLot);
+            selectedParkingLot.park(car, parkingTicket);
             return parkingTicket;
         }
 
@@ -41,7 +41,7 @@ public class ParkingBoy {
         return fetchedCar;
     }
 
-    public Optional<ParkingLot> selectParkingLot() {
-        return parkingLotList.stream().filter(lot -> !lot.isFull()).findFirst();
+    public ParkingLot selectParkingLot() {
+        return parkingLotList.stream().filter(lot -> !lot.isFull()).findFirst().orElse(null);
     }
 }
