@@ -16,18 +16,15 @@ public class ParkingLotTest {
 
     @Test
     public void should_return_parking_ticket_when_park_car() {
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
-
-        parkingLot.park(car, parkingTicket);
+        ParkingTicket parkingTicket = parkingLot.park(car);
 
         Assert.assertNotNull(parkingTicket);
     }
 
     @Test
     public void should_return_car_when_fetch_car_with_parking_ticket() {
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = parkingLot.park(car);
 
-        parkingLot.park(car, parkingTicket);
         Car fetchedCar = parkingLot.fetch(parkingTicket);
 
         Assert.assertEquals(car, fetchedCar);
@@ -36,9 +33,8 @@ public class ParkingLotTest {
     @Test
     public void should_return_no_car_when_fetch_car_with_wrong_parking_ticket() {
         ParkingLot secondParkingLot = new ParkingLot();
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = parkingLot.park(car);
 
-        parkingLot.park(car, parkingTicket);
         ParkingTicket wrongParkingTicket = new ParkingTicket(secondParkingLot);
         Car fetchedCar = parkingLot.fetch(wrongParkingTicket);
 
@@ -47,9 +43,8 @@ public class ParkingLotTest {
 
     @Test
     public void should_return_no_car_when_fetch_car_with_used_parking_ticket() {
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = parkingLot.park(car);
 
-        parkingLot.park(car, parkingTicket);
         parkingLot.fetch(parkingTicket);
         Car fetchedCarInSecondTime = parkingLot.fetch(parkingTicket);
 

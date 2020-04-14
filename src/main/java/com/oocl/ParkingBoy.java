@@ -19,8 +19,8 @@ public class ParkingBoy {
         ParkingLot selectedParkingLot = selectParkingLot();
 
         if (selectedParkingLot != null) {
-            ParkingTicket parkingTicket = new ParkingTicket(selectedParkingLot);
-            selectedParkingLot.park(car, parkingTicket);
+            ParkingTicket parkingTicket = selectedParkingLot.park(car);
+            parkingTicket.setParkingLot(selectedParkingLot);
             return parkingTicket;
         }
 
@@ -31,6 +31,9 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
             throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_NO_PARKING_TICKET);
+        }
+        if (parkingTicket.getParkingLot() == null){
+            throw new IllegalArgumentException(ErrorMsg.ERROR_MSG_OF_UNRECOGNIZED_PARKING_TICKET);
         }
         ParkingLot designatedParkingLot = parkingTicket.getParkingLot();
         Car fetchedCar = designatedParkingLot.fetch(parkingTicket);

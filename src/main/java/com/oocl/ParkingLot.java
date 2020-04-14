@@ -16,10 +16,18 @@ public class ParkingLot {
         this.capacity = parkingLotSize;
     }
 
-    public void park(Car car, ParkingTicket parkingTicket) {
-        if (!isFull() && car != null) {
-            parkingTicketCarMap.put(parkingTicket, car);
+    public ParkingTicket park(Car car) {
+        if (car == null){
+            return null;
         }
+
+        if (isFull()) {
+            return null;
+        }
+
+        ParkingTicket parkingTicket = new ParkingTicket();
+        parkingTicketCarMap.put(parkingTicket, car);
+        return parkingTicket;
     }
 
     public Car fetch(ParkingTicket parkingTicket) {

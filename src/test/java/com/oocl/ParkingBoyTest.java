@@ -42,9 +42,8 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLotList = Collections.singletonList(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
-
-        parkingLot.park(car, parkingTicket);
+        ParkingTicket parkingTicket = parkingLot.park(car);
+        parkingTicket.setParkingLot(parkingLot);
         //when
         Car fetchedCarFromParkingLot = parkingBoy.fetch(parkingTicket);
         //then
@@ -72,10 +71,10 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLotList = Collections.singletonList(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
-        ParkingTicket incorrectParkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = parkingLot.park(car);
+        parkingTicket.setParkingLot(parkingLot);
+        ParkingTicket incorrectParkingTicket = new ParkingTicket();
 
-        parkingLot.park(car, parkingTicket);
         parkingBoy.fetch(incorrectParkingTicket);
     }
 
@@ -96,9 +95,9 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLotList = Collections.singletonList(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = parkingLot.park(car);
+        parkingTicket.setParkingLot(parkingLot);
 
-        parkingLot.park(car, parkingTicket);
         parkingBoy.fetch(parkingTicket);
         parkingBoy.fetch(parkingTicket);
     }
@@ -110,9 +109,7 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(firstParkingLot);
-
-        firstParkingLot.park(car, parkingTicket);
+        ParkingTicket parkingTicket = firstParkingLot.park(car);
         ParkingTicket actualParkingTicket = parkingBoy.park(car);
 
         Assert.assertEquals(secondParkingLot, actualParkingTicket.getParkingLot());
@@ -125,9 +122,7 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(secondParkingLot);
-
-        firstParkingLot.park(car, parkingTicket);
+        ParkingTicket parkingTicket = firstParkingLot.park(car);
         ParkingTicket actualParkingTicket = parkingBoy.park(car);
 
         Assert.assertEquals(firstParkingLot, actualParkingTicket.getParkingLot());

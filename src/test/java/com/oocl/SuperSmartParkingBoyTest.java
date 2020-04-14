@@ -12,10 +12,8 @@ public class SuperSmartParkingBoyTest {
         Car car = new Car();
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(3);
-        ParkingTicket firstParkingTicket = new ParkingTicket(firstParkingLot);
-        ParkingTicket secondParkingTicket = new ParkingTicket(secondParkingLot);
-        firstParkingLot.park(car, firstParkingTicket);
-        secondParkingLot.park(car, secondParkingTicket);
+        ParkingTicket firstParkingTicket =firstParkingLot.park(car);;
+        ParkingTicket secondParkingTicket = secondParkingLot.park(car);
 
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
         ParkingTicket actualPackingTicket = superSmartParkingBoy.park(car);
@@ -28,10 +26,8 @@ public class SuperSmartParkingBoyTest {
         Car car = new Car();
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingTicket firstParkingTicket = new ParkingTicket(firstParkingLot);
-        ParkingTicket secondParkingTicket = new ParkingTicket(secondParkingLot);
-        firstParkingLot.park(car, firstParkingTicket);
-        secondParkingLot.park(car, secondParkingTicket);
+        ParkingTicket firstParkingTicket = firstParkingLot.park(car);
+        ParkingTicket secondParkingTicket = secondParkingLot.park(car);
 
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
         ParkingTicket actualPackingTicket = superSmartParkingBoy.park(car);

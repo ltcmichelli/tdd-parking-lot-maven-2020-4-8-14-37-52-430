@@ -99,9 +99,8 @@ public class ServiceManagerTest {
         List<ParkingLot> parkingLotList = Collections.singletonList(parkingLot);
         ServiceManager serviceManager = new ServiceManager(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
-
-        parkingLot.park(car, parkingTicket);
+        ParkingTicket parkingTicket = parkingLot.park(car);
+        parkingTicket.setParkingLot(parkingLot);
         //when
         Car fetchedCarFromParkingLot = serviceManager.fetch(parkingTicket);
         //then
@@ -129,10 +128,9 @@ public class ServiceManagerTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
         ServiceManager serviceManager = new ServiceManager(parkingLotList);
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = parkingLot.park(car);;
         ParkingTicket incorrectParkingTicket = new ParkingTicket(parkingLot);
 
-        parkingLot.park(car, parkingTicket);
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
         serviceManager.assignParkingBoyToFetch(incorrectParkingTicket);
     }
@@ -158,10 +156,11 @@ public class ServiceManagerTest {
         ServiceManager serviceManager = new ServiceManager(parkingLotList);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
-        parkingLot.park(car, parkingTicket);
+        ParkingTicket parkingTicket = parkingLot.park(car);
+        parkingTicket.setParkingLot(parkingLot);
         parkingBoy.fetch(parkingTicket);
         serviceManager.assignParkingBoyToFetch(parkingTicket);
     }
