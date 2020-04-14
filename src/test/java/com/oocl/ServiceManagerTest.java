@@ -78,7 +78,8 @@ public class ServiceManagerTest {
 
         ServiceManager serviceManager = new ServiceManager(Collections.singletonList(parkingLot));
 
-        ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket parkingTicket = new ParkingTicket();
+        parkingTicket.setParkingLot(parkingLot);
         serviceManager.assignParkingBoyToFetch(parkingTicket);
     }
 
@@ -129,7 +130,7 @@ public class ServiceManagerTest {
         Car car = new Car();
         ServiceManager serviceManager = new ServiceManager(parkingLotList);
         ParkingTicket parkingTicket = parkingLot.park(car);;
-        ParkingTicket incorrectParkingTicket = new ParkingTicket(parkingLot);
+        ParkingTicket incorrectParkingTicket = new ParkingTicket();
 
         serviceManager.assignParkingBoyToManagementList(parkingBoy);
         serviceManager.assignParkingBoyToFetch(incorrectParkingTicket);

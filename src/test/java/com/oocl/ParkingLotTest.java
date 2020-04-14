@@ -35,7 +35,7 @@ public class ParkingLotTest {
         ParkingLot secondParkingLot = new ParkingLot();
         ParkingTicket parkingTicket = parkingLot.park(car);
 
-        ParkingTicket wrongParkingTicket = new ParkingTicket(secondParkingLot);
+        ParkingTicket wrongParkingTicket = new ParkingTicket();
         Car fetchedCar = parkingLot.fetch(wrongParkingTicket);
 
         Assert.assertNull(fetchedCar);
